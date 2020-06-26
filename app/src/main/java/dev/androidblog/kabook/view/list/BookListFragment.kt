@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dev.androidblog.kabook.R
 import dev.androidblog.kabook.api.dao.BookDAO
 import dev.androidblog.kabook.util.BOOK_LIST_DEFAULT_PAGE
+import dev.androidblog.kabook.util.toast
 import dev.androidblog.kabook.view.base.BaseFragment
 import dev.androidblog.kabook.view.list.adapter.BookListAdapter
 import kotlinx.android.synthetic.main.fragment_book_list.*
@@ -52,5 +53,9 @@ class BookListFragment : BaseFragment(R.layout.fragment_book_list), BookListCont
 
     interface OnClickBookItem {
         fun onClick(book: BookDAO.Documents)
+    }
+
+    override fun showLastItemToast() {
+        getString(R.string.toast_last_item).toast(requireActivity())
     }
 }

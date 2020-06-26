@@ -1,7 +1,9 @@
 package dev.androidblog.kabook.util
 
+import android.content.Context
 import android.view.View
 import android.widget.ImageView
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import java.text.NumberFormat
 
@@ -18,6 +20,10 @@ fun String.toYearMonth(): String {
     val year = this.substring(0, 4)
     val month = this.substring(5, 7)
     return "${year}년 ${month}월"
+}
+
+fun String.toast(context: Context) {
+    Toast.makeText(context, this, Toast.LENGTH_SHORT).show()
 }
 
 fun Int.toNumber(): String {
@@ -39,3 +45,4 @@ fun View.invisible() {
 fun View.gone() {
     this.visibility = View.GONE
 }
+

@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="12dp"
         android:paddingBottom="16dp"
-        android:text="@string/detail_title"
+        android:text="@string/title_detail"
         android:textColor="@color/color_text_title"
         android:textSize="21sp"
         android:textStyle="bold"

@@ -12,17 +12,27 @@ class BookListPresenter(override val view: BookListContract.View) : BookListCont
     private lateinit var query: String
     private lateinit var bookListAdapter: BookListAdapter
     private var page: Int = BOOK_LIST_DEFAULT_PAGE
+    private var isEnd: Boolean = false
 
     override fun setBookListAdapter(listAdapter: BookListAdapter) {
         this.bookListAdapter = listAdapter
     }
 
     override fun searchBook(query: String, page: Int) {
+        if (page != BOOK_LIST_DEFAULT_PAGE && isEnd) {
+            view.showLastItemToast()
+            return
+        } else {
+            isEnd = false
+        }
+
         this.query = query
         this.page = page
 
         BookRepo.getSearchBook(query = query, page = page, callback = object : BaseCallBack<BookDAO>() {
             override fun onLoaded(data: BookDAO) {
+                isEnd = data.meta.is_end
+
                 if (page == BOOK_LIST_DEFAULT_PAGE) {
                     refreshList(data.documents)
                 } else {
