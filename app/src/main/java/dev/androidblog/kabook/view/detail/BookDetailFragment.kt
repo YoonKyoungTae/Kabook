@@ -1,9 +1,14 @@
 package dev.androidblog.kabook.view.detail
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
 import androidx.core.os.bundleOf
 import dev.androidblog.kabook.R
 import dev.androidblog.kabook.api.dao.BookDAO
 import dev.androidblog.kabook.util.simpleLoadUrl
+import dev.androidblog.kabook.util.toast
+import dev.androidblog.kabook.util.visible
 import dev.androidblog.kabook.view.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_book_detail.*
 
@@ -37,6 +42,14 @@ class BookDetailFragment : BaseFragment(R.layout.fragment_book_detail), BookDeta
         iv_back_arrow.setOnClickListener {
             requireActivity().onBackPressed()
         }
+
+        tv_book_url.setOnClickListener {
+            try {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(tv_book_url.text.toString())))
+            } catch (e: ActivityNotFoundException) {
+                getString(R.string.toast_error_2).toast(requireActivity())
+            }
+        }
     }
 
     override fun setBookTitle(title: String) {
@@ -48,11 +61,11 @@ class BookDetailFragment : BaseFragment(R.layout.fragment_book_detail), BookDeta
     }
 
     override fun setBookUrl(url: String) {
-        //
+        tv_book_url.text = url
     }
 
     override fun setBookISBN(isbn: String) {
-        //
+        tv_book_isbn.text = isbn
     }
 
     override fun setBookDatetime(datetime: String) {
@@ -68,7 +81,8 @@ class BookDetailFragment : BaseFragment(R.layout.fragment_book_detail), BookDeta
     }
 
     override fun setBookTranslators(translators: String) {
-        //
+        tv_book_translators.visible()
+        tv_book_translators.text = translators
     }
 
     override fun setBookPrice(price: String) {

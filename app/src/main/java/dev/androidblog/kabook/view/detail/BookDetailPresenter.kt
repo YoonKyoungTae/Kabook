@@ -7,39 +7,50 @@ import dev.androidblog.kabook.util.toYearMonth
 
 class BookDetailPresenter(override val view: BookDetailContract.View) : BookDetailContract.Presenter {
 
-    private lateinit var book: BookDAO.Documents
-
     override fun setBook(book: BookDAO.Documents) {
-        this.book = book
+        with(book) {
+            view.setBookTitle(title)
+            view.setBookContents(makeContentsStr(contents))
+            view.setBookUrl(url)
+            view.setBookISBN(makeISBN(isbn))
+            view.setBookDatetime(datetime.toYearMonth())
+            view.setBookAuthors(makeAuthorsStr(authors.toString()))
+            view.setBookPublisher(makePublisherStr(publisher))
+            view.setBookPrice(makePriceStr(price))
+            view.setBookSalePrice(makeSalePriceStr(sale_price))
+            view.setBookThumbnail(thumbnail)
+            view.setBookStatus(status)
+            makeTranslatorsStr(translators)?.let {
+                view.setBookTranslators(it)
+            }
+        }
+    }
 
-        view.setBookTitle(book.title)
-
-        view.setBookContents(book.contents)
-
-        view.setBookUrl(book.url)
-
-        view.setBookISBN(book.isbn)
-
-        view.setBookDatetime(book.datetime.toYearMonth())
-
-        view.setBookAuthors("지은이 : ${book.authors.toString().replace("[", "").replace("]", "")}")
-
-        view.setBookPublisher("출판사 : ${book.publisher}")
-
-//        view.setBookTranslators(book.translators)
-
-        view.setBookPrice("(정가 ${book.price.toNumber()}원)")
-
-        view.setBookSalePrice(if (book.sale_price >= 0) {
-            "${book.sale_price.toNumber()}원"
+    private fun makeContentsStr(contents: String): String =
+        if (contents.isEmpty()) {
+            "-"
         } else {
-            "0원"
-        })
+            contents
+        }
 
-        view.setBookThumbnail(book.thumbnail)
+    private fun makeISBN(isbn: String): String = "ISBN : $isbn"
 
-        view.setBookStatus(book.status)
+    private fun makeAuthorsStr(authors: String): String = "지은이 : ${authors.replace("[", "").replace("]", "")}"
 
+    private fun makeTranslatorsStr(authors: ArrayList<String>): String? = if (authors.isNullOrEmpty()) {
+        null
+    } else {
+        "번역 : ${authors.toString().replace("[", "").replace("]", "")}"
+    }
+
+    private fun makePublisherStr(publisher: String): String = "출판사 : $publisher"
+
+    private fun makePriceStr(price: Int): String = "(정가 ${price.toNumber()}원)"
+
+    private fun makeSalePriceStr(salePrice: Int): String = if (salePrice >= 0) {
+        "${salePrice.toNumber()}원"
+    } else {
+        "0원"
     }
 
     override fun detachView() {
