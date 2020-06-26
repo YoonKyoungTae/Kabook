@@ -7,10 +7,12 @@
 
 ### APK
 > Google Drive
-https://drive.google.com/file/d/15W_Ki58XFvrKDwcRVWsq2mW5p49O4D7u/view?usp=sharing
+
+- https://drive.google.com/file/d/15W_Ki58XFvrKDwcRVWsq2mW5p49O4D7u/view?usp=sharing
 
 > Github
-https://github.com/YoonKyoungTae/Kabook/blob/master/kabook.apk
+
+- https://github.com/YoonKyoungTae/Kabook/blob/master/kabook.apk
 
 ## Development environment
 - Kotlin **1.3.61**
