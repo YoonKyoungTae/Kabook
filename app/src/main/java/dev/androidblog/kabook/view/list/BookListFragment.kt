@@ -2,13 +2,16 @@ package dev.androidblog.kabook.view.list
 
 import android.view.View
 import android.view.animation.AnimationUtils
+import android.view.inputmethod.EditorInfo
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dev.androidblog.kabook.R
 import dev.androidblog.kabook.api.dao.BookDAO
 import dev.androidblog.kabook.util.BOOK_LIST_DEFAULT_PAGE
+import dev.androidblog.kabook.util.gone
 import dev.androidblog.kabook.util.toast
+import dev.androidblog.kabook.util.visible
 import dev.androidblog.kabook.view.base.BaseFragment
 import dev.androidblog.kabook.view.list.adapter.BookListAdapter
 import kotlinx.android.synthetic.main.fragment_book_list.*
@@ -32,6 +35,7 @@ class BookListFragment : BaseFragment(R.layout.fragment_book_list), BookListCont
 
     override fun initView() {
         initListAdapter()
+        initEditText()
     }
 
     override fun initOnClickListener() {
@@ -68,11 +72,36 @@ class BookListFragment : BaseFragment(R.layout.fragment_book_list), BookListCont
         presenter.setBookListAdapter(bookListAdapter)
     }
 
+    private fun initEditText() {
+        et_search_bar.setOnEditorActionListener { v, actionId, event ->
+            when(actionId) {
+                EditorInfo.IME_ACTION_SEARCH -> {
+                    val query = et_search_bar.text.toString()
+                    presenter.searchBook(query, BOOK_LIST_DEFAULT_PAGE)
+                }
+            }
+
+            true
+        }
+    }
+
     interface OnClickBookItem {
         fun onClick(book: BookDAO.Documents)
     }
 
     override fun showLastItemToast() {
         getString(R.string.toast_last_item).toast(requireActivity())
+    }
+
+    override fun showError() {
+        getString(R.string.toast_error).toast(requireActivity())
+    }
+
+    override fun showPlaceHolder() {
+        iv_kakao.visible()
+    }
+
+    override fun hidePlaceHolder() {
+        iv_kakao.gone()
     }
 }

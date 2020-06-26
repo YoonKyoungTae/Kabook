@@ -33,6 +33,13 @@ class BookListPresenter(override val view: BookListContract.View) : BookListCont
             override fun onLoaded(data: BookDAO) {
                 isEnd = data.meta.is_end
 
+                if (data.documents.size > 0) {
+                    view.hidePlaceHolder()
+                } else {
+                    view.showError()
+                    view.showPlaceHolder()
+                }
+
                 if (page == BOOK_LIST_DEFAULT_PAGE) {
                     refreshList(data.documents)
                 } else {
@@ -41,7 +48,8 @@ class BookListPresenter(override val view: BookListContract.View) : BookListCont
             }
 
             override fun onFailed() {
-
+                view.showError()
+                view.showPlaceHolder()
             }
         })
     }

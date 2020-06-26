@@ -2,6 +2,7 @@
     <string name="app_name">KaBook</string>
 
     <string name="toast_last_item">마지막 도서입니다.</string>
+    <string name="toast_error">검색에 실패했습니다.</string>
 
     <string name="search_book">도서명 검색</string>
     <string name="title_detail">상세</string>

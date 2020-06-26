@@ -10,6 +10,12 @@ interface BookListContract {
 
         fun showLastItemToast()
 
+        fun showError()
+
+        fun showPlaceHolder()
+
+        fun hidePlaceHolder()
+
     }
 
     interface Presenter : BaseContract.Presenter<View> {

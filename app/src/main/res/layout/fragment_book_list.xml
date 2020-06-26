@@ -13,6 +13,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
         android:background="@color/color_transparent"
+        android:imeOptions="actionSearch"
         android:hint="@string/search_book"
         android:inputType="text"
         android:textColor="@color/color_text_title"
@@ -62,6 +63,16 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/rv_book_list"/>
+        app:layout_constraintTop_toTopOf="@+id/rv_book_list" />
+
+    <ImageView
+        android:id="@+id/iv_kakao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_kakao_pay"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
