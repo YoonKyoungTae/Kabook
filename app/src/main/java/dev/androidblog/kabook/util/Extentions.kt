@@ -17,9 +17,13 @@ fun ImageView.simpleLoadUrl(url: String) {
 }
 
 fun String.toYearMonth(): String {
-    val year = this.substring(0, 4)
-    val month = this.substring(5, 7)
-    return "${year}년 ${month}월"
+    return try {
+        val year = this.substring(0, 4)
+        val month = this.substring(5, 7)
+        "${year}년 ${month}월"
+    } catch (e: StringIndexOutOfBoundsException) {
+        "----년 --월"
+    }
 }
 
 fun String.toast(context: Context) {
