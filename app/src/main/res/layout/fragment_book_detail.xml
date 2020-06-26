@@ -43,7 +43,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_back_arrow"
-        tools:background="@color/color_placeholder" />
+        android:background="@color/color_placeholder" />
 
     <TextView
         android:id="@+id/tv_book_title"
@@ -53,11 +53,117 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:textColor="@color/color_text_title"
-        android:textSize="21sp"
+        android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_book_image"
         tools:text="책 제목" />
+
+    <TextView
+        android:id="@+id/tv_book_authors"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/color_text_hint"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_book_title"
+        app:layout_constraintStart_toStartOf="@+id/tv_book_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_book_title"
+        tools:text="지은이" />
+
+    <TextView
+        android:id="@+id/tv_book_publisher"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/color_text_hint"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_book_title"
+        app:layout_constraintStart_toStartOf="@+id/tv_book_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_book_authors"
+        tools:text="출판사" />
+
+    <TextView
+        android:id="@+id/tv_book_datetime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/color_text_hint"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_book_title"
+        app:layout_constraintStart_toStartOf="@+id/tv_book_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_book_publisher"
+        tools:text="2020년 06월" />
+
+    <TextView
+        android:id="@+id/tv_book_status"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/color_text_hint"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_book_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_book_datetime"
+        tools:text="판매상태" />
+
+    <TextView
+        android:id="@+id/tv_book_sale_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_text_sale_price"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/tv_book_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_book_status"
+        tools:text="10,000원" />
+
+    <TextView
+        android:id="@+id/tv_book_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:textColor="@color/color_text_hint"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_book_sale_price"
+        app:layout_constraintStart_toEndOf="@+id/tv_book_sale_price"
+        tools:text="10,000원" />
+
+    <TextView
+        android:id="@+id/tv_contents"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="책 소개"
+        android:textColor="@color/color_text_sub_title"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/tv_book_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_book_sale_price" />
+
+    <View
+        android:id="@+id/v_divider"
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/color_divider_yellow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_contents" />
+
+    <TextView
+        android:id="@+id/tv_book_contents"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="책 내용"
+        android:textColor="@color/color_text_sub_title"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_book_title"
+        app:layout_constraintTop_toBottomOf="@+id/v_divider" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

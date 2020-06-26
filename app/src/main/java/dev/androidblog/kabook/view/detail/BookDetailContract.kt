@@ -9,7 +9,27 @@ interface BookDetailContract {
 
         fun setBookTitle(title: String)
 
-        fun setBookThumnail(url: String)
+        fun setBookContents(contents: String)
+
+        fun setBookUrl(url: String)
+
+        fun setBookISBN(isbn: String)
+
+        fun setBookDatetime(datetime: String)
+
+        fun setBookAuthors(authors: String)
+
+        fun setBookPublisher(publisher: String)
+
+        fun setBookTranslators(translators: String)
+
+        fun setBookPrice(price: String)
+
+        fun setBookSalePrice(salePrice: String)
+
+        fun setBookThumbnail(url: String)
+
+        fun setBookStatus(status: String)
 
     }
 

@@ -10,6 +10,7 @@
     <color name="color_text_sale_price">#E02222</color>
 
     <color name="color_divider">#B0EEEEEE</color>
+    <color name="color_divider_yellow">#FFD400</color>
     <color name="color_transparent">#00000000</color>
     <color name="color_background">#FFF</color>
     <color name="color_placeholder">#808080</color>

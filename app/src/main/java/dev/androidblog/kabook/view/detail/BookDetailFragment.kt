@@ -43,8 +43,48 @@ class BookDetailFragment : BaseFragment(R.layout.fragment_book_detail), BookDeta
         tv_book_title.text = title
     }
 
-    override fun setBookThumnail(url: String) {
+    override fun setBookContents(contents: String) {
+        tv_book_contents.text = contents
+    }
+
+    override fun setBookUrl(url: String) {
+        //
+    }
+
+    override fun setBookISBN(isbn: String) {
+        //
+    }
+
+    override fun setBookDatetime(datetime: String) {
+        tv_book_datetime.text = datetime
+    }
+
+    override fun setBookAuthors(authors: String) {
+        tv_book_authors.text = authors
+    }
+
+    override fun setBookPublisher(publisher: String) {
+        tv_book_publisher.text = publisher
+    }
+
+    override fun setBookTranslators(translators: String) {
+        //
+    }
+
+    override fun setBookPrice(price: String) {
+        tv_book_price.text = price
+    }
+
+    override fun setBookSalePrice(salePrice: String) {
+        tv_book_sale_price.text = salePrice
+    }
+
+    override fun setBookThumbnail(url: String) {
         iv_book_image.simpleLoadUrl(url)
+    }
+
+    override fun setBookStatus(status: String) {
+        tv_book_status.text = status
     }
 
 }
