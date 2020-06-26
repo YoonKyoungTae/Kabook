@@ -1,7 +1,10 @@
 package dev.androidblog.kabook.view.list
 
+import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import dev.androidblog.kabook.R
 import dev.androidblog.kabook.api.dao.BookDAO
 import dev.androidblog.kabook.util.BOOK_LIST_DEFAULT_PAGE
@@ -47,7 +50,21 @@ class BookListFragment : BaseFragment(R.layout.fragment_book_list), BookListCont
 
         rv_book_list.layoutManager = LinearLayoutManager(requireActivity())
         rv_book_list.adapter = bookListAdapter
+        rv_book_list.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (newState == 1) {
+                    iv_shadow.visibility = View.VISIBLE
+                    iv_shadow.animation = AnimationUtils.loadAnimation(activity, R.anim.fade_in)
+                } else if (newState == 0) {
+                    if (!rv_book_list.canScrollVertically(-1)) {
+                        iv_shadow.visibility = View.GONE
+                        iv_shadow.animation = AnimationUtils.loadAnimation(activity, R.anim.fade_out)
+                    }
+                }
+            }
 
+        })
         presenter.setBookListAdapter(bookListAdapter)
     }
 
