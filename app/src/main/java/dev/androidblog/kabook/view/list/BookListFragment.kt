@@ -3,7 +3,6 @@ package dev.androidblog.kabook.view.list
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,7 +21,6 @@ class BookListFragment : BaseFragment(R.layout.fragment_book_list), BookListCont
     }
 
     private lateinit var bookListAdapter: BookListAdapter
-    private lateinit var keyboard: InputMethodManager
     var onClickBookItem: OnClickBookItem? = null
 
     companion object {
