@@ -3,15 +3,13 @@ package dev.androidblog.kabook.view.list
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dev.androidblog.kabook.R
 import dev.androidblog.kabook.api.dao.BookDAO
-import dev.androidblog.kabook.util.BOOK_LIST_DEFAULT_PAGE
-import dev.androidblog.kabook.util.gone
-import dev.androidblog.kabook.util.toast
-import dev.androidblog.kabook.util.visible
+import dev.androidblog.kabook.util.*
 import dev.androidblog.kabook.view.base.BaseFragment
 import dev.androidblog.kabook.view.list.adapter.BookListAdapter
 import kotlinx.android.synthetic.main.fragment_book_list.*
@@ -24,6 +22,7 @@ class BookListFragment : BaseFragment(R.layout.fragment_book_list), BookListCont
     }
 
     private lateinit var bookListAdapter: BookListAdapter
+    private lateinit var keyboard: InputMethodManager
     var onClickBookItem: OnClickBookItem? = null
 
     companion object {
@@ -40,8 +39,7 @@ class BookListFragment : BaseFragment(R.layout.fragment_book_list), BookListCont
 
     override fun initOnClickListener() {
         iv_search_btn.setOnClickListener {
-            val query = et_search_bar.text.toString()
-            presenter.searchBook(query, BOOK_LIST_DEFAULT_PAGE)
+            search()
         }
     }
 
@@ -76,8 +74,7 @@ class BookListFragment : BaseFragment(R.layout.fragment_book_list), BookListCont
         et_search_bar.setOnEditorActionListener { v, actionId, event ->
             when(actionId) {
                 EditorInfo.IME_ACTION_SEARCH -> {
-                    val query = et_search_bar.text.toString()
-                    presenter.searchBook(query, BOOK_LIST_DEFAULT_PAGE)
+                    search()
                 }
             }
 
@@ -103,5 +100,11 @@ class BookListFragment : BaseFragment(R.layout.fragment_book_list), BookListCont
 
     override fun hidePlaceHolder() {
         iv_kakao.gone()
+    }
+
+    private fun search() {
+        val query = et_search_bar.text.toString()
+        presenter.searchBook(query, BOOK_LIST_DEFAULT_PAGE)
+        hideKeyboard()
     }
 }
