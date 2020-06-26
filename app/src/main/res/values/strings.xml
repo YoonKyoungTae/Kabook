@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">KaBook</string>
+    <string name="search_book">도서명 검색</string>
+    <string name="detail_title">상세</string>
+
+    <string name="des_book_image">책 이미지</string>
+    <string name="des_back_arrow">뒤로가기</string>
+</resources>
