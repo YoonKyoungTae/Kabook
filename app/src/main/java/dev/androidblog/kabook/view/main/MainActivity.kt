@@ -1,6 +1,5 @@
 package dev.androidblog.kabook.view.main
 
-import android.widget.Toast
 import dev.androidblog.kabook.R
 import dev.androidblog.kabook.api.dao.BookDAO
 import dev.androidblog.kabook.view.base.BaseActivity
@@ -10,7 +9,6 @@ import dev.androidblog.kabook.view.list.BookListFragment
 class MainActivity : BaseActivity(R.layout.activity_main), MainContract.View {
 
     private val listFragment = BookListFragment.newInstance()
-    private var pressTime: Long = 0L
 
     override fun initView() {
         initFragment()
@@ -41,12 +39,4 @@ class MainActivity : BaseActivity(R.layout.activity_main), MainContract.View {
             .commit()
     }
 
-    override fun onBackPressed() {
-        if (System.currentTimeMillis() - pressTime >= 2000) {
-            pressTime = System.currentTimeMillis()
-            Toast.makeText(applicationContext, "뒤로 버튼을 한번 더 누르면 종료합니다.", Toast.LENGTH_SHORT).show();
-        } else if (System.currentTimeMillis() - pressTime < 2000) {
-            super.onBackPressed()
-        }
-    }
 }
