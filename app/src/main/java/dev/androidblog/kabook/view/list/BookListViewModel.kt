@@ -11,23 +11,64 @@ import dev.androidblog.kabook.util.BOOK_LIST_DEFAULT_PAGE
 import dev.androidblog.kabook.view.list.adapter.BookListAdapter
 
 
-class BookListViewModel() : ViewModel {
+class BookListViewModel() : ViewModel() {
 
     private lateinit var query: String
     private lateinit var bookListAdapter: BookListAdapter
     private var page: Int = BOOK_LIST_DEFAULT_PAGE
     private var isEnd: Boolean = false
 
-    private val bookData: MutableLiveData<List<BookDAO.Documents>> = MutableLiveData()
+    private val _bookData: MutableLiveData<List<BookDAO.Documents>> = MutableLiveData()
+    val bookData: LiveData<List<BookDAO.Documents>> = _bookData
 
-    fun getBookData(): LiveData<List<BookDAO.Documents>> {
-        return bookData
+    fun searchBook(query: String, page: Int) {
+        if (page != BOOK_LIST_DEFAULT_PAGE && isEnd) {
+//            view.showLastItemToast()
+//            return
+        } else {
+            isEnd = false
+        }
+
+        this.query = query
+        this.page = page
+
+        BookRepo.getSearchBook(query = query, page = page, callback = object : BaseCallBack<BookDAO>() {
+            override fun onLoaded(data: BookDAO) {
+
+                isEnd = data.meta.is_end
+
+//                if (data.documents.size > 0) {
+//                    view.hidePlaceHolder()
+//                } else {
+//                    view.showError()
+//                    view.showPlaceHolder()
+//                }
+
+                if (page == BOOK_LIST_DEFAULT_PAGE) {
+                    _bookData.value = data.documents
+                }
+
+//                else {
+//                    addList(data.documents)
+//                }
+            }
+
+            override fun onFailed() {
+//                view.showError()
+//                view.showPlaceHolder()
+            }
+        })
     }
 
-    fun loadBookData() {
 
-    }
-
+//    fun getBookData(): LiveData<List<BookDAO.Documents>> {
+//        return bookData
+//    }
+//
+//    fun loadBookData() {
+//
+//    }
+//
 
 
 //

@@ -3,6 +3,7 @@ package dev.androidblog.kabook.view.base
 import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import dev.androidblog.kabook.view.list.BookListViewModel
 
 abstract class BaseActivity(@LayoutRes layout: Int) : AppCompatActivity(layout) {
 

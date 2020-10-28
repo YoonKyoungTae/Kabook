@@ -4,6 +4,9 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.EditorInfo
 import androidx.core.os.bundleOf
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dev.androidblog.kabook.R
@@ -16,9 +19,9 @@ import kotlinx.android.synthetic.main.fragment_book_list.*
 
 class BookListFragment : BaseFragment(R.layout.fragment_book_list), BookListContract.View {
 
-    private val presenter: BookListContract.Presenter by lazy {
-        BookListPresenter(this)
-    }
+//    private val presenter: BookListContract.Presenter by lazy {
+//        BookListPresenter(this)
+//    }
 
     private lateinit var bookListAdapter: BookListAdapter
     var onClickBookItem: OnClickBookItem? = null
@@ -29,8 +32,16 @@ class BookListFragment : BaseFragment(R.layout.fragment_book_list), BookListCont
                 arguments = bundleOf()
             }
     }
+    val model: BookListViewModel by activityViewModels()
+
 
     override fun initView() {
+        model.bookData.observe(this, Observer<List<BookDAO.Documents>> {
+            bookListAdapter.bookList.clear()
+            bookListAdapter.bookList.addAll(it)
+            bookListAdapter.notifyDataSetChanged()
+        })
+
         initListAdapter()
         initEditText()
     }
@@ -45,7 +56,7 @@ class BookListFragment : BaseFragment(R.layout.fragment_book_list), BookListCont
         bookListAdapter = BookListAdapter({
             onClickBookItem?.onClick(it)
         }) {
-            presenter.loadNext()
+//            presenter.loadNext()
         }
 
         rv_book_list.layoutManager = LinearLayoutManager(requireActivity())
@@ -65,7 +76,7 @@ class BookListFragment : BaseFragment(R.layout.fragment_book_list), BookListCont
             }
 
         })
-        presenter.setBookListAdapter(bookListAdapter)
+//        presenter.setBookListAdapter(bookListAdapter)
     }
 
     private fun initEditText() {
@@ -102,7 +113,10 @@ class BookListFragment : BaseFragment(R.layout.fragment_book_list), BookListCont
 
     private fun search() {
         val query = et_search_bar.text.toString()
-        presenter.searchBook(query, BOOK_LIST_DEFAULT_PAGE)
+        model.searchBook(query, BOOK_LIST_DEFAULT_PAGE)
+
+
+//        presenter.searchBook(query, BOOK_LIST_DEFAULT_PAGE)
         hideKeyboard()
     }
 }
